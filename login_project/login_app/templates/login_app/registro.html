@@ -1,0 +1,23 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'registro_styles.css' %}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+</head>
+<body>
+    <div class="cuadro-contenedor">
+        <!-- Formulario de Registro -->
+        <h1>Registro</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Registrarse</button>
+        </form>
+        <p>Ya tienes una cuenta? <a href="{% url 'inicio_sesion' %}">Inicia Sesión</a></p>
+    </div>
+</body>
+</html>

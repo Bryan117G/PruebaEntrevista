@@ -1,0 +1,77 @@
+/* Fondo de página */
+body {
+  background-image: url('https://professor-falken.com/wp-content/uploads/2017/11/Como-cambiar-la-imagen-de-fondo-del-inicio-de-sesion-en-tu-Mac-professor-falken.com_.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Encabezado */
+.container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Tabla */
+.container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.container th, .container td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.container th {
+  background-color: #f2f2f2;
+}
+
+/* Dashboard */
+#dashboard-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#dashboard-chart {
+  max-width: 100%;
+}
+
+/* Modelo de Probabilidad */
+#probabilidad-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#calcular-probabilidad, #exportar-informe {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#calcular-probabilidad {
+  margin-right: 10px;
+}
+
+#resultado-probabilidad {
+  margin-top: 20px;
+  font-weight: bold;
+}
+

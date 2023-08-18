@@ -1,0 +1,75 @@
+/* Fondo de página */
+body {
+    background-image: url('https://professor-falken.com/wp-content/uploads/2017/11/Como-cambiar-la-imagen-de-fondo-del-inicio-de-sesion-en-tu-Mac-professor-falken.com_.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* Contenedor de inicio de sesión */
+  .login-container {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    max-width: 400px;
+  }
+  
+  /* Encabezado */
+  .login-container h1 {
+    margin-bottom: 20px;
+  }
+  
+  /* Formulario de inicio de sesión */
+  .login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-form label {
+    margin-bottom: 5px;
+  }
+  
+  .login-form input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .login-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-form p {
+    margin-top: 10px;
+  }
+  
+  .login-form a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .cuadro-contenedor {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0 auto;
+    width: 300px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+  

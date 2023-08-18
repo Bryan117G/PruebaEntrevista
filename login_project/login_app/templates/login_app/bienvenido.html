@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido</title>
+  <link rel="stylesheet" href="{% static 'login_app/styles.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>Bienvenido a tu página de inicio</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre de Empresa</th>
+          <th>Tipo de Sector</th>
+          <th>Calificador de Riesgos</th>
+          <th>Tipo de Riesgos</th>
+          <th>Ponderación de Calificación</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for empresa in empresas_aleatorias %}
+          <tr>
+            <td>{{ empresa.nombre }}</td>
+            <td>{{ empresa.tipo_sector }}</td>
+            <td>{{ empresa.calificador_riesgos }}</td>
+            <td>{{ empresa.tipo_riesgos }}</td>
+            <td>{{ empresa.ponderacion_calificacion }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div id="dashboard-container">
+        <h2>Dashboard</h2>
+        <button id="generate-dashboard">Generar Dashboard</button>
+        <canvas id="dashboard-chart" width="400" height="200"></canvas>
+      </div>
+  
+      <!-- Botón para calcular la probabilidad -->
+      <div id="probabilidad-container">
+        <h2>Modelo de Probabilidad</h2>
+        <button id="calcular-probabilidad">Calcular Probabilidad</button>
+        <div id="resultado-probabilidad"></div>
+      </div>
+
+      <div id="probabilidad-container">
+        <button id="exportar-informe" onclick="exportarInforme()">Exportar Informe</button>
+      </div>
+    </div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      document.getElementById('generate-dashboard').addEventListener('click', function () {
+        const ctx = document.getElementById('dashboard-chart').getContext('2d');
+        const myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: [{% for empresa in empresas_aleatorias %}'{{ empresa.nombre }}',{% endfor %}],
+            datasets: [{
+              label: 'Ponderación de Calificación',
+              data: [{% for empresa in empresas_aleatorias %}{{ empresa.ponderacion_calificacion }},{% endfor %}],
+              backgroundColor: [{% for empresa in empresas_aleatorias %}'{% if empresa.calificador_riesgos == "Alto" %}rgba(255, 99, 132, 0.6){% elif empresa.calificador_riesgos == "Medio" %}rgba(255, 205, 86, 0.6){% else %}rgba(54, 162, 235, 0.6){% endif %}'{% if forloop.last %}{% else %},{% endif %}{% endfor %}],
+              borderWidth: 1,
+            }],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+      });
+  
+      document.getElementById('calcular-probabilidad').addEventListener('click', function () {
+        const calcularProbabilidad = (calificadorRiesgos, ponderacionCalificacion) => {
+          let probabilidad = 0;
+  
+          if (calificadorRiesgos === 'Alto') {
+            probabilidad = 0.8;
+          } else if (calificadorRiesgos === 'Medio') {
+            probabilidad = 0.5;
+          } else {
+            probabilidad = 0.2;
+          }
+  
+          probabilidad *= ponderacionCalificacion / 100;
+  
+          return probabilidad;
+        };
+  
+        const resultadoProbabilidad = document.getElementById('resultado-probabilidad');
+        resultadoProbabilidad.innerHTML = '';
+  
+        {% for empresa in empresas_aleatorias %}
+          const probabilidad{{ forloop.counter }} = calcularProbabilidad('{{ empresa.calificador_riesgos }}', {{ empresa.ponderacion_calificacion }});
+          const p{{ forloop.counter }} = document.createElement('p');
+          p{{ forloop.counter }}.innerText = 'Probabilidad para {{ empresa.nombre }}: ' + probabilidad{{ forloop.counter }};
+          resultadoProbabilidad.appendChild(p{{ forloop.counter }});
+        {% endfor %}
+      });
+    </script>
+    <script>
+        function exportarInforme() {
+          window.location.href = "{% url 'exportar_informe' %}";
+        }
+      </script>
+  </body>
+  </html>
